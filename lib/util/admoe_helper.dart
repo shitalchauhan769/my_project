@@ -1,20 +1,23 @@
 import 'dart:io';
+import 'dart:ui';
+import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdmobHelper {
   BannerAd? bannerAd;
   InterstitialAd? interstitialAdn;
   RewardedAd? rewardedAd;
+  NativeAd? nativeAd;
 
   Future<void> loadBanner() async {
-    await BannerAd(
-            size: AdSize.banner,
-            adUnitId: Platform.isAndroid
-                ? 'ca-app-pub-3940256099942544/6300978111'
-                : 'ca-app-pub-3940256099942544/2934735716',
-            request: const AdRequest(),
-            listener: const BannerAdListener())
-        .load();
+    bannerAd = BannerAd(
+        size: AdSize.banner,
+        adUnitId: Platform.isAndroid
+            ? 'ca-app-pub-3940256099942544/6300978111'
+            : 'ca-app-pub-3940256099942544/2934735716',
+        request: const AdRequest(),
+        listener: const BannerAdListener());
+    bannerAd!.load();
   }
 
   void loadInterstitial() {
@@ -32,7 +35,20 @@ class AdmobHelper {
     );
   }
 
-  void loadNative() {}
+  void loadNative() {
+    nativeAd = NativeAd(
+      adUnitId: Platform.isAndroid
+          ? "ca-app-pub-3940256099942544/2247696110"
+          : "ca-app-pub-3940256099942544/3986624511",
+      listener: NativeAdListener(),
+      request: AdRequest(),
+      nativeTemplateStyle: NativeTemplateStyle(
+        templateType: TemplateType.medium,
+        mainBackgroundColor: Colors.white,
+      ),
+    );
+    nativeAd!.load();
+  }
 
   void loadRewarded() {
     RewardedAd.load(
@@ -42,7 +58,7 @@ class AdmobHelper {
         request: const AdRequest(),
         rewardedAdLoadCallback: RewardedAdLoadCallback(
           onAdLoaded: (ad) {
-            rewardedAd=ad;
+            rewardedAd = ad;
           },
           onAdFailedToLoad: (error) {},
         ));

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_common/get_reset.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:my_project/util/admoe_helper.dart';
 
@@ -10,7 +13,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  BannerAd? bannerAd;
   AdmobHelper helper = AdmobHelper();
 
   @override
@@ -74,6 +76,10 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             child: const Text("Rewarded"),
           ),
+          ElevatedButton(onPressed: () {
+            Get.toNamed("/native");
+
+          }, child: const Text("Native"),),
         ],
       ),
     );
