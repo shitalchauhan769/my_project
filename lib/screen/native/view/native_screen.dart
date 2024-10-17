@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import '../../../util/admoe_helper.dart';
+import '../../../util/admob_helper.dart';
 
 class NativeScreen extends StatefulWidget {
   const NativeScreen({super.key});
@@ -28,7 +28,7 @@ class _NativeScreenState extends State<NativeScreen> {
       body: Column(
         children: [
           SizedBox(
-            height: MediaQuery.sizeOf(context).height,
+            height:200,
             width: MediaQuery.sizeOf(context).width,
             child: AdWidget(
               ad: helper.nativeAd!,
